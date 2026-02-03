@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Migrate Discovery Service",
-    "version": "2024-12-01-preview",
+    "version": "2025-12-12-preview",
     "description": "Azure OffAzure Resource Provider management API."
   },
   "schemes": [
@@ -132,6 +132,9 @@
     },
     {
       "name": "MasterSitesController"
+    },
+    {
+      "name": "MasterSitesImportJobsController"
     },
     {
       "name": "MasterSitesOperationsStatusController"
@@ -4030,6 +4033,167 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/import": {
+      "post": {
+        "operationId": "MasterSitesController_ImportMachines",
+        "tags": [
+          "MasterSitesController"
+        ],
+        "description": "Method to import machines to master site.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SasUriResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MasterSitesController_ImportMachines_MaximumSet_Gen": {
+            "$ref": "./examples/MasterSitesController_ImportMachines_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/jobs": {
+      "get": {
+        "operationId": "MasterSitesImportJobsController_ListByMasterSite",
+        "tags": [
+          "MasterSitesImportJobsController"
+        ],
+        "description": "Gets all import jobs in a master site. Jobs are returned sorted descending by start time.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MasterSiteImportJobListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MasterSitesImportJobsController_ListByMasterSite_MaximumSet_Gen": {
+            "$ref": "./examples/MasterSitesImportJobsController_ListByMasterSite_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/jobs/{jobName}": {
+      "get": {
+        "operationId": "MasterSitesImportJobsController_Get",
+        "tags": [
+          "MasterSitesImportJobsController"
+        ],
+        "description": "Retrieves details about a specific import job associated with a Master Site.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "Job Arm Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MasterSiteImportJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MasterSitesImportJobsController_Get_MaximumSet_Gen": {
+            "$ref": "./examples/MasterSitesImportJobsController_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/operationsStatus/{operationStatusName}": {
       "get": {
         "operationId": "MasterSitesOperationsStatusController_GetVmwareOperationStatus",
@@ -5482,6 +5646,9 @@
         "x-ms-examples": {
           "GetImportJobExample": {
             "$ref": "./examples/SqlImportJobsController_GetImportjob_Example.json"
+          },
+          "SqlImportJobsController_GetImportjob_MaximumSet_Gen": {
+            "$ref": "./examples/SqlImportJobsController_GetImportjob_MaximumSet_Gen.json"
           }
         }
       }
@@ -6494,6 +6661,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SasUriResponse"
+            }
+          },
           "202": {
             "description": "Accepted. The operation has been accepted and is being processed asynchronously. Use the URL in the Location header to monitor the status of the operation.",
             "headers": {
@@ -6522,6 +6695,9 @@
         "x-ms-examples": {
           "ImportUriExample": {
             "$ref": "./examples/SqlSitesController_ImportUri_Example.json"
+          },
+          "SqlSitesController_ImportUri_MaximumSet_Gen": {
+            "$ref": "./examples/SqlSitesController_ImportUri_MaximumSet_Gen.json"
           }
         }
       }
@@ -6586,6 +6762,9 @@
         "x-ms-examples": {
           "ValidateAndImportUriExample": {
             "$ref": "./examples/SqlSitesController_ValidateAndImportUri_Example.json"
+          },
+          "SqlSitesController_ValidateAndImportUri_MaximumSet_Gen": {
+            "$ref": "./examples/SqlSitesController_ValidateAndImportUri_MaximumSet_Gen.json"
           }
         }
       }
@@ -13463,42 +13642,6 @@
         }
       }
     },
-    "Default": {
-      "type": "string",
-      "description": "HealthError Details Source",
-      "enum": [
-        "default"
-      ],
-      "x-ms-enum": {
-        "name": "Default",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "default",
-            "value": "default",
-            "description": "default value."
-          }
-        ]
-      }
-    },
-    "DefaultValues": {
-      "type": "string",
-      "description": "HealthError Details Source",
-      "enum": [
-        "default"
-      ],
-      "x-ms-enum": {
-        "name": "DefaultValues",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "default",
-            "value": "default",
-            "description": "default value."
-          }
-        ]
-      }
-    },
     "DeleteImportMachinesJob": {
       "type": "object",
       "description": "A host resource belonging to a site resource.",
@@ -14067,7 +14210,10 @@
       "description": "Servers Discovery source.",
       "enum": [
         "Arc",
-        "Appliance"
+        "Appliance",
+        "Collector",
+        "ImportCsvServer",
+        "ImportRvTools"
       ],
       "x-ms-enum": {
         "name": "DiscoverySource",
@@ -14082,6 +14228,21 @@
             "name": "Appliance",
             "value": "Appliance",
             "description": "Appliance Discovery Source."
+          },
+          {
+            "name": "Collector",
+            "value": "Collector",
+            "description": "Collector Discovery Source."
+          },
+          {
+            "name": "ImportCsvServer",
+            "value": "ImportCsvServer",
+            "description": "CSV Server Import Discovery."
+          },
+          {
+            "name": "ImportRvTools",
+            "value": "ImportRvTools",
+            "description": "RV tools Import Discovery."
           },
           {
             "name": "ImportCsvServer",
@@ -15727,6 +15888,10 @@
           "type": "string",
           "description": "Gets or sets the ARM ID of migration hub solution for SDS."
         },
+        "discoverySource": {
+          "$ref": "#/definitions/DiscoverySource",
+          "description": "Gets or sets the Discovery source properties for the hyper-v site."
+        },
         "siteAppliancePropertiesCollection": {
           "type": "array",
           "description": "Gets or sets the appliance details used by service to communicate to the appliance.",
@@ -16221,6 +16386,60 @@
       "required": [
         "value"
       ]
+    },
+    "ImportDiscoveredDataJobResult": {
+      "type": "string",
+      "description": "Import Discovered Data Job Result enum.",
+      "enum": [
+        "Unknown",
+        "Completed",
+        "CompletedWithWarnings",
+        "CompletedWithErrors",
+        "Failed",
+        "WaitingForBlobUpload",
+        "InProgress"
+      ],
+      "x-ms-enum": {
+        "name": "ImportDiscoveredDataJobResult",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown value."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Completed value."
+          },
+          {
+            "name": "CompletedWithWarnings",
+            "value": "CompletedWithWarnings",
+            "description": "CompletedWithWarnings value."
+          },
+          {
+            "name": "CompletedWithErrors",
+            "value": "CompletedWithErrors",
+            "description": "CompletedWithErrors value."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed value."
+          },
+          {
+            "name": "WaitingForBlobUpload",
+            "value": "WaitingForBlobUpload",
+            "description": "WaitingForBlobUpload value."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "InProgress value."
+          }
+        ]
+      }
     },
     "ImportJob": {
       "type": "object",
@@ -17125,6 +17344,92 @@
         }
       ]
     },
+    "MasterSiteImportJob": {
+      "type": "object",
+      "description": "A master site import job resource belonging to a master site resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MasterSiteImportJobProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "description": "Gets or sets the Job status.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "description": "Gets or sets the Job start time.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "description": "Gets or sets the Job end time.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Gets or sets the Display name.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "MasterSiteImportJobListResult": {
+      "type": "object",
+      "description": "The response of a MasterSiteImportJob list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The MasterSiteImportJob items on this page",
+          "items": {
+            "$ref": "#/definitions/MasterSiteImportJob"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MasterSiteImportJobProperties": {
+      "type": "object",
+      "description": "Master Site Import Job Properties",
+      "properties": {
+        "blobName": {
+          "type": "string",
+          "description": "Gets or sets the blob name."
+        },
+        "jobResult": {
+          "$ref": "#/definitions/ImportDiscoveredDataJobResult",
+          "description": "Gets or sets the job result status."
+        },
+        "blobCreationTimeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the blob creation time stamp.",
+          "readOnly": true
+        },
+        "errorSummary": {
+          "$ref": "#/definitions/JobErrorSummary",
+          "description": "Gets or sets the job error summary.",
+          "readOnly": true
+        }
+      }
+    },
     "MasterSiteListResult": {
       "type": "object",
       "description": "The response of a MasterSite list operation.",
@@ -17195,6 +17500,10 @@
           "format": "date-time",
           "description": "Gets the last refresh time of arc status in UTC.",
           "readOnly": true
+        },
+        "migrateProjectId": {
+          "type": "string",
+          "description": "Gets or sets the migrate project id."
         }
       }
     },
@@ -17267,6 +17576,10 @@
         "customerStorageAccountArmId": {
           "type": "string",
           "description": "Gets or sets a value for customer storage account ARM id."
+        },
+        "migrateProjectId": {
+          "type": "string",
+          "description": "Gets or sets the migrate project id."
         }
       }
     },
@@ -18005,8 +18318,7 @@
         },
         "importType": {
           "$ref": "#/definitions/ImportTypeValues",
-          "description": "Gets or sets the import type.",
-          "default": "AzureMigrateCSV"
+          "description": "Gets or sets the import type."
         }
       }
     },
@@ -18535,6 +18847,10 @@
         "arcScope": {
           "$ref": "#/definitions/ArcScopePropertiesUpdate",
           "description": "Gets or sets the Arc scope properties for the server site."
+        },
+        "discoverySource": {
+          "$ref": "#/definitions/DiscoverySource",
+          "description": "Gets or sets the Discovery source properties for the server site."
         }
       }
     },
@@ -19028,9 +19344,17 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation."
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "discoverySource": {
+          "$ref": "#/definitions/DiscoverySource",
+          "description": "Gets or sets the Discovery source properties for the hyper-v site."
         }
-      }
+      },
+      "required": [
+        "discoverySource"
+      ]
     },
     "SiteSpnProperties": {
       "type": "object",
@@ -19108,6 +19432,10 @@
           "$ref": "#/definitions/DiscoveryScenario",
           "description": "Gets or sets the discovery scenario."
         },
+        "discoverySource": {
+          "$ref": "#/definitions/DiscoverySource",
+          "description": "Gets or sets the Discovery source properties for the site."
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
@@ -19165,8 +19493,15 @@
         "arcScope": {
           "$ref": "#/definitions/ArcScopeProperties",
           "description": "Gets or sets the Arc scope properties for the server site."
+        },
+        "discoverySource": {
+          "$ref": "#/definitions/DiscoverySource",
+          "description": "Gets or sets the Discovery source properties for the server site."
         }
-      }
+      },
+      "required": [
+        "discoverySource"
+      ]
     },
     "SpringBootDiscovery": {
       "type": "object",
@@ -19897,7 +20232,8 @@
           "description": "Collection of errors encountered during the SQL import operation",
           "items": {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "errorCount": {
           "type": "integer",
@@ -21601,7 +21937,7 @@
         "2023-10-01-preview",
         "2024-05-01-preview",
         "2024-07-01-preview",
-        "2024-12-01-preview"
+        "2025-12-12-preview"
       ],
       "x-ms-enum": {
         "name": "Versions",
@@ -21679,8 +22015,13 @@
           },
           {
             "name": "v2024_12_01_preview",
-            "value": "2024-12-01-preview",
-            "description": "Api version 2024-12-01-preview."
+            "value": "2025-12-12-preview",
+            "description": "Api version 2025-12-12-preview."
+          },
+          {
+            "name": "v2025_12_12_preview",
+            "value": "2025-12-12-preview",
+            "description": "Api version 2025-12-12-preview."
           }
         ]
       }
@@ -22432,6 +22773,10 @@
         "discoverySolutionId": {
           "type": "string",
           "description": "Gets or sets the ARM ID of migration hub solution for SDS."
+        },
+        "discoverySource": {
+          "$ref": "#/definitions/DiscoverySource",
+          "description": "Gets or sets the Discovery source properties for the site."
         },
         "siteAppliancePropertiesCollection": {
           "type": "array",

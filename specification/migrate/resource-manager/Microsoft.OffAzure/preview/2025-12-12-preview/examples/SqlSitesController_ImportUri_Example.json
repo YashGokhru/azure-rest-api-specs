@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2024-12-01-preview",
+    "api-version": "2025-12-12-preview",
     "subscriptionId": "291F8922-D548-4CAF-9C43-C65300D5AFD4",
     "resourceGroupName": "exampleResourceGroup",
     "siteName": "55--o3Q",
@@ -11,6 +11,12 @@
     "202": {
       "headers": {
         "location": "https://contoso.com/operationstatus"
+      }
+    },
+    "200": {
+      "body": {
+        "uri": "https://example.blob.core.windows.net/container/file.csv?sas_token",
+        "importType": "AzureMigrateCSV"
       }
     }
   }
