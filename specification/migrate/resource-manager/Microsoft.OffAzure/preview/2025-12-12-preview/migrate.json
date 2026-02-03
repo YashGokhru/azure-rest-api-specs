@@ -2148,7 +2148,7 @@
               "default"
             ],
             "x-ms-enum": {
-              "name": "Default",
+              "name": "HypervSoftwareInventoryDefault",
               "modelAsString": true,
               "values": [
                 {
@@ -10196,7 +10196,7 @@
               "default"
             ],
             "x-ms-enum": {
-              "name": "Default",
+              "name": "ServerSoftwareInventoryDefault",
               "modelAsString": true,
               "values": [
                 {
@@ -12164,7 +12164,7 @@
               "default"
             ],
             "x-ms-enum": {
-              "name": "Default",
+              "name": "VmwareSoftwareInventoryDefault",
               "modelAsString": true,
               "values": [
                 {
@@ -17613,7 +17613,7 @@
         ]
       }
     },
-    "Object": {
+    "MigrateObject": {
       "type": "object",
       "description": "object model"
     },
