@@ -25,6 +25,7 @@ To see additional help and options, run:
 These are the global settings for the API.
 
 ``` yaml
+openapi-type: arm
 tag: package-preview-2025-12
 ```
 
@@ -231,6 +232,14 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
+
+## JavaScript
+
+See configuration in [readme.javascript.md](./readme.javascript.md)
+
+## TypeScript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## Java multi-api
 
